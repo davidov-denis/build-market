@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <form method="post" id="loginForm" action="/admin/login/">
+            <div class="form-group">
+                <label for="userEmail">Электронная почта</label>
+                <input type="email" name="email" class="form-control" id="userEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Пароль">
+            </div>
+            <button type="button" onclick="check()" class="btn btn-success">Войти</button>
+        </form>
+    </div>
+{% endblock content %}

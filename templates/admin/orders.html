@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Заказы</title>
+{% endblock title %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Номер заказа</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Почта</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Статус/Нынешний статус</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <th scope="row" onclick="location.href='/admin/orders/{{ order[0] }}/'">{{ order[0] }}</th>
+                    <td onclick="location.href='/admin/orders/{{ order[0] }}/'">{{ order[2] }}</td>
+                    <td onclick="location.href='/admin/orders/{{ order[0] }}/'">{{ order[3] }}</td>
+                    <td onclick="location.href='/admin/orders/{{ order[0] }}/'">{{ order[1] }}</td>
+                    <td onclick="location.href='/admin/orders/{{ order[0] }}/'">{{ order[5] }}</td>
+                    <td>
+                        <select id="{{ 'status' + loop.index|string }}" class="form-control" name="statusOfOrder">
+                            <option>Заказ принят</option>
+                            <option>Заказ собирается</option>
+                            <option>Заказ собран</option>
+                            <option>Заказ готов к выдаче</option>
+                        </select>
+                        <button type="button" onclick="location.href = `/admin/update-status/{{ order[0] }}/${document.getElementById('{{ 'status' + loop.index|string }}').value}/`" class="btn btn-success mt-2">Изменить статус</button>
+                        <p class="text-danger">{{ order[4] }}</p></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

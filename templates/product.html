@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>{{ product[1] }}</title>
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <h3 class="h3">{{ product[1] }}</h3>
+        <p class="h5">Описание:</p>
+        {{ product[2].replace("\r\n", "<br>")|safe }}
+        <p class="h5">Цена: {{ product[3] }}</p>
+        {% if images == 1 %}
+            <img class="img-fluid"
+                 src="{{ url_for('static', filename='productImages/' + product[0]|string + "/1.jpg" ) }}">
+        {% else %}
+            {% for img in range(1, images + 1) %}
+                <img src="{{ url_for('static', filename='productImages/' + product[0]|string + "/" + img|string + ".jpg" ) }}" class="img-thumbnail">
+            {% endfor %}
+        {% endif %}
+        <button type="button" onclick="AddToCart({{ product[0] }})" class="btn btn-lg btn-block btn-outline-primary">Добавить в корзину</button>
+    </div>
+{% endblock content %}

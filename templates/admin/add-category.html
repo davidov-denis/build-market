@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <form method="post" id="categotyForm" action="">
+            <div class="form-group">
+                <label for="category">Название категории</label>
+                <input type="category" name="category" class="form-control" id="category" placeholder="Название категории">
+            </div>
+            <button type="button" onclick="checkCategory()" class="btn btn-success">Добавить категорию</button>
+        </form>
+    </div>
+{% endblock content %}

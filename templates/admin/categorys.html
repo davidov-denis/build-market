@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Категории</title>
+{% endblock title %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Название категории</th>
+                    <th scope="col">Дейстие</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categorys %}
+                <tr>
+                    <td>{{ category[1] }}</td>
+                    <td class="table-danger" scope="row" onclick="location.href='/admin/delete-category/{{ category[1] }}/'">Удалить категорию</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

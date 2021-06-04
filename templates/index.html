@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Мир крепежа</title>
+{% endblock title %}
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Мир крепежа</h1>
+        <p class="lead">Мир крепежа - один из лучших магазинов строй материалов</p>
+    </div>
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            {% for product in products %}
+                    <div class="card mb-4 box-shadow" style="min-width: 25%;!important;">
+                        <div onclick="location.href=`/{{ product[4] }}/{{ product[0] }}`" class="card-header">
+                            <h4 class="my-0 font-weight-normal">{{ product[1] }}</h4>
+                        </div>
+                        <img onclick="location.href=`/{{ product[4] }}/{{ product[0] }}`" class="card-img-top" src="{{ url_for('static', filename='productImages/' + product[0]|string + "/1.jpg") }}">
+                        <div class="card-body">
+                            <h1 onclick="location.href=`/{{ product[4] }}/{{ product[0] }}`" class="card-title pricing-card-title">{{ product[3] }}&#8381;</h1>
+                            <p onclick="location.href=`/{{ product[4] }}/{{ product[0] }}`" class="text-truncate">{{ product[2] }}</p>
+                            <button type="button" onclick="AddToCart({{ product[0] }})" class="btn btn-lg btn-block btn-outline-primary">Добавить в корзину</button>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

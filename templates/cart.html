@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Корзина</title>
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        {% if cart_products %}
+            <table id="cart-table" class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена за единицу</th>
+                    <th scope="col">Количество</th>
+                    <th>Общая стоимость</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cart_product in cart_products %}
+                    <tr>
+                        <th scope="row"><img style="max-height: 100px;" class="img-fluid" src="{{ url_for('static', filename='productImages/' + cart_product[0]|string + "/1.jpg") }}"></th>
+                        <td>{{ cart_product[1] }}</td>
+                        <td>{{ cart_product[3] }}</td>
+                        <td>{{ cart_products_quality[loop.index0] }}</td>
+                        <td id="price">{{ cart_product[3]|int * cart_products_quality[loop.index0] }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="bg-warning">
+                    <th scope="row">Итого</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ itog }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <form style="display: none" method="post" id="orderForm" action="">
+                <div class="form-group">
+                    <label for="userEmail">Электронная почта</label>
+                    <input type="email" name="email" class="form-control" id="userEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="userName">Имя</label>
+                    <input type="text" name="userName" class="form-control" id="userName" placeholder="Имя">
+                </div>
+                <div class="form-group">
+                    <label for="userSurname">Фамилия</label>
+                    <input type="text" name="userSurname" class="form-control" id="userSurname" placeholder="userSurname">
+                </div>
+                <input type="hidden" name="price" value="{{ itog }}">
+                <button type="button" onclick="checkOrder()" class="btn btn-success">Оформить заказ</button>
+            </form>
+            <div class="mb-4">
+                <button onclick="document.getElementById('orderForm').style.display = 'block'; document.getElementById('cartButton').style.display = 'none'" class="btn btn-success float-right" id="cartButton">Оформить заказ</button>
+            </div>
+        {% else %}
+            <p class="p center">Корзина пуста</p>
+        {% endif %}
+    </div>
+{% endblock content %}
